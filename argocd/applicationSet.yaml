@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-boostrap
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/EduardoThums/terraform-helm-test.git
+        revision: main
+        directories:
+          - path: cluster-boostrap
+  template:
+    metadata:
+      name: '{{index .path.segments 0}}'
+    spec:
+      project: default
+      sources:
+        - repoURL: https://github.com/EduardoThums/terraform-helm-test.git
+          targetRevision: main
+          path: '{{.path.path}}'
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: argocd
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+        syncOptions:
+          - CreateNamespace=true
