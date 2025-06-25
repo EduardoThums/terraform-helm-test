@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://charts.jetstack.io
     targetRevision: v1.18.0
-    chart: jetstack/cert-manager
+    chart: cert-manager
     helm:
       parameters:
         - name: crds.enabled
