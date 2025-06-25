@@ -11,7 +11,7 @@ spec:
         repoURL: https://github.com/EduardoThums/terraform-helm-test.git
         revision: main
         directories:
-          - path: cluster-boostrap
+          - path: cluster-bootstrap
   template:
     metadata:
       name: '{{index .path.segments 0}}'

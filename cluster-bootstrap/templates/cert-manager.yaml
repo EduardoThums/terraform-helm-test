@@ -9,8 +9,8 @@ spec:
   source:
     repoURL: https://charts.jetstack.io
     targetRevision: v1.18.0
+    chart: jetstack/cert-manager
     helm:
-      releaseName: jetstack/cert-manager
       parameters:
         - name: crds.enabled
           value: 'true'
