@@ -6,10 +6,15 @@ metadata:
   namespace: argocd
 spec:
   project: default
+  # helm install -n ingress-nginx --create-namespace ingress-nginx ingress-nginx/ingress-nginx --set controller.progressDeadlineSeconds=10
   sources:
     - repoURL: https://kubernetes.github.io/ingress-nginx
       targetRevision: 4.12.3
       chart: ingress-nginx
+      helm:
+        parameters:
+          - name: controller.progressDeadlineSeconds=10
+          - value: '10'
   destination:
     namespace: ingress-nginx
     server: https://kubernetes.default.svc

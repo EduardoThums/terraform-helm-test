@@ -23,10 +23,12 @@ spec:
           path: '{{.path.path}}'
           helm:
             parameters:
+              - name: argocd.certManager.enabled
+                value: 'false'
               - name: argocd.ingressNginx.enabled
                 value: 'true'
               - name: argocd.girusIngress.enabled
-                value: 'true'
+                value: 'false'
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: argocd
