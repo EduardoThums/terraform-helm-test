@@ -15,6 +15,7 @@ spec:
       containers:
         - name: create
           image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.3.0
+          serviceAccountName: ingress-nginx
           args:
             - create
             - --host
