@@ -16,14 +16,14 @@ metadata:
       nginx.ingress.kubernetes.io/auth-type: basic
       nginx.ingress.kubernetes.io/auth-secret: basic-auth
       nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - linuxtips'
-      cert-manager.io/issuer: 'cloudflare-production'
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      # cert-manager.io/issuer: 'cloudflare-production'
+      # nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - '*.iowqoeywqoeysoadyoasdyoasdyasodiyasod.uk' # this is the domain configure in the issuer
-      secretName: nginx-ingress-production
+  # tls:
+  #   - hosts:
+  #       - '*.iowqoeywqoeysoadyoasdyoasdyasodiyasod.uk' # this is the domain configure in the issuer
+  #     secretName: nginx-ingress-production
   rules:
     - host: 'girus.iowqoeywqoeysoadyoasdyoasdyasodiyasod.uk'
       http:
