@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ingress-nginx
+  name: ingress-nginx-app-of-apps
   namespace: argocd
 spec:
   project: default
-  sources:
-    - repoURL: https://github.com/EduardoThums/terraform-helm-test.git
-      targetRevision: main
-      path: ingress-nginx-app-of-apps/
+  source:
+    repoURL: https://github.com/EduardoThums/terraform-helm-test.git
+    targetRevision: main
+    path: ingress-nginx-app-of-apps/
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: argocd

@@ -16,7 +16,8 @@ spec:
         parameters:
           - name: controller.admissionWebhooks.enabled
             value: "true"
-
+          - name: controller.admissionWebhooks.patch.enabled
+            value: "false"  # disable hook-based patch job
       # helm:
       # https://kubernetes.github.io/ingress-nginx/how-it-works/
         # valuesObject:
@@ -32,9 +33,3 @@ spec:
     #   selfHeal: true # ensures tha the state of the application in the repo is respected
     syncOptions:
       - CreateNamespace=true
-   # Important: Add sync-wave annotation
-  info:
-    - name: sync-wave
-      value: "0"
-  # This is optional but recommended:
-  # metadata:
