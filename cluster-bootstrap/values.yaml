@@ -3,3 +3,7 @@ argocd:
     enabled: true
   ingressNginx:
     enabled: false
+  girusIngress:
+    enabled: true
+    cloudflare:
+      token: ""

@@ -21,6 +21,10 @@ spec:
         - repoURL: https://github.com/EduardoThums/terraform-helm-test.git
           targetRevision: main
           path: '{{.path.path}}'
+          helm:
+            parameters:
+              - name: argocd.ingressNginx.enabled
+                value: 'true'
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: argocd

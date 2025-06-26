@@ -1,0 +1,24 @@
+{{ if .Values.argocd.girusIngress.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: girus-ingress
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/EduardoThums/terraform-helm-test.git
+    targetRevision: main
+    path: girus-ingress/
+    helm:
+      parameters:
+        - name: cloudflare.token
+          value: {{ .Values.argocd.girusIngress.cloudflare.token }}
+  destination:
+    namespace: girus
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+{{ end }}
