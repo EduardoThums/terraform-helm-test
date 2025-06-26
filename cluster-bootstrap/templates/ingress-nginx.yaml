@@ -13,9 +13,11 @@ spec:
       chart: ingress-nginx
       helm:
       # https://kubernetes.github.io/ingress-nginx/how-it-works/
-        parameters:
-          - name: controller.progressDeadlineSeconds=10
-          - value: 10
+        valuesObject:
+          controller:
+            progressDeadlineSeconds: 10
+          # - name: controller.progressDeadlineSeconds=10
+          # - value: 10
   destination:
     namespace: ingress-nginx
     server: https://kubernetes.default.svc
