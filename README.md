@@ -1,0 +1,1 @@
+ingress nginx Post-install hook Job doesnt work in argocd due to limited support for hooks
