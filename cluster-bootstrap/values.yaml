@@ -4,6 +4,6 @@ argocd:
   ingressNginx:
     enabled: false
   girusIngress:
-    enabled: true
+    enabled: false
     cloudflare:
       token: ""
