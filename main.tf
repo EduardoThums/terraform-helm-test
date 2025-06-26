@@ -23,8 +23,10 @@ provider "helm" {
 #   }
 # }
 
+
+
 provider "kubernetes" {
-  # Configuration options
+  config_path = "~/.kube/config"
 }
 
 terraform {
@@ -67,7 +69,7 @@ resource "kubernetes_secret" "cloudflare_token" {
   }
 
   data = {
-    password = base64encode(var.cloudflare_token)
+    token = var.cloudflare_token
   }
 
   type = "Opaque"
