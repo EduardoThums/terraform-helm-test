@@ -18,6 +18,15 @@ provider "helm" {
 }
 
 
+# terraform {
+#   required_providers {
+#   }
+# }
+
+provider "kubernetes" {
+  # Configuration options
+}
+
 terraform {
   required_version = ">= 0.13"
 
@@ -26,7 +35,15 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = ">= 1.7.0"
     }
+
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "2.37.1"
+    }
+ 
   }
+
+  
 }
 
 resource "helm_release" "argocd" {
@@ -38,9 +55,27 @@ resource "helm_release" "argocd" {
 }
 
 
+variable "cloudflare_token" {
+  type      = string
+  sensitive = true
+}
+
+resource "kubernetes_secret" "cloudflare_token" {
+  metadata {
+    name      = "cloudflare-token"
+    namespace = "girus"
+  }
+
+  data = {
+    password = base64encode(var.cloudflare_token)
+  }
+
+  type = "Opaque"
+}
+
 resource "kubectl_manifest" "cluster_boostrap" {
   yaml_body = file("./argocd/applicationSet.yaml")
-  depends_on = [ helm_release.argocd ]
+  depends_on = [ helm_release.argocd, kubernetes_secret.cloudflare_token ]
 }
 
 resource "null_resource" "wait_for_nginx" {
@@ -67,7 +102,7 @@ resource "null_resource" "wait_for_cert_manager" {
   }
 }
 
-# resource "kubectl_manifest" "test" {
+# resource "kubectl_manifest" "app_of_apps" {
 #   yaml_body = file("./argocd/applicationSet.yaml")
 #   depends_on = [ helm_release.argocd ]
 # }

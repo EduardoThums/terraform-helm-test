@@ -1,12 +1,12 @@
-apiVersion: v1
-data:
-  token: {{ .Values.cloudflare.token }}
-kind: Secret
-metadata:
-  name: cloudflare-token
-  namespace: girus
-type: Opaque
----
+# apiVersion: v1
+# data:
+#   token: {{ .Values.cloudflare.token }}
+# kind: Secret
+# metadata:
+#   name: cloudflare-token
+#   namespace: girus
+# type: Opaque
+# ---
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:

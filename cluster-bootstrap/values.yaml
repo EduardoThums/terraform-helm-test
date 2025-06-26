@@ -5,5 +5,3 @@ argocd:
     enabled: false
   girusIngress:
     enabled: false
-    cloudflare:
-      token: ""
