@@ -10,10 +10,6 @@ spec:
     repoURL: https://github.com/EduardoThums/terraform-helm-test.git
     targetRevision: main
     path: helm/girus-ingress
-    # helm:
-    #   parameters:
-    #     - name: cloudflare.token
-    #       value: {{ .Values.argocd.girusIngress.cloudflare.token }}
   destination:
     namespace: girus
     server: https://kubernetes.default.svc
