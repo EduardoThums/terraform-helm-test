@@ -54,31 +54,41 @@ resource "helm_release" "argocd" {
   chart      = "argo-cd"
   create_namespace = true
   namespace = "argocd"
+  values = [file("./argocd/values.yaml")]
 }
 
 
-# variable "cloudflare_token" {
-#   type      = string
-#   sensitive = true
-# }
+variable "cloudflare_token" {
+  type      = string
+  sensitive = true
+}
 
-# resource "kubernetes_secret" "cloudflare_token" {
-#   metadata {
-#     name      = "cloudflare-token"
-#     namespace = "girus"
-#   }
 
-#   data = {
-#     token = var.cloudflare_token
-#   }
+resource "kubernetes_namespace" "girus" {
+  metadata {
+    name      = "girus"
+  }
+}
 
-#   type = "Opaque"
-# }
+resource "kubernetes_secret" "cloudflare_token" {
+  depends_on = [ kubernetes_namespace.girus ]
 
-# resource "kubectl_manifest" "cluster_boostrap" {
-#   yaml_body = file("./argocd/applicationSet.yaml")
-#   depends_on = [ helm_release.argocd, kubernetes_secret.cloudflare_token ]
-# }
+  metadata {
+    name      = "cloudflare-token"
+    namespace = kubernetes_namespace.girus.metadata[0].name
+  }
+
+  data = {
+    token = var.cloudflare_token
+  }
+
+  type = "Opaque"
+}
+
+resource "kubectl_manifest" "cluster_boostrap" {
+  yaml_body = file("./argocd/applicationSet.yaml")
+  depends_on = [ helm_release.argocd, kubernetes_secret.cloudflare_token ]
+}
 
 # resource "null_resource" "wait_for_nginx" {
 #   depends_on = [kubectl_manifest.cluster_boostrap]

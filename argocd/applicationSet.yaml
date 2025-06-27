@@ -28,13 +28,11 @@ spec:
               - name: argocd.ingressNginx.enabled
                 value: 'true'
               - name: argocd.girusIngress.enabled
-                value: 'true'
+                value: 'false'
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: argocd
       syncPolicy:
-        automated:
-          selfHeal: true
-          prune: true
+        automated: {}
         syncOptions:
           - CreateNamespace=true
