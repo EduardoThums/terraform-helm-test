@@ -8,16 +8,9 @@ spec:
   project: default
   # helm install -n ingress-nginx --create-namespace ingress-nginx ingress-nginx/ingress-nginx --set controller.progressDeadlineSeconds=10
   sources:
-    - repoURL: https://kubernetes.github.io/ingress-nginx
-      targetRevision: 4.12.3
-      chart: ingress-nginx
-      helm:
-      # https://kubernetes.github.io/ingress-nginx/how-it-works/
-        valuesObject:
-          controller:
-            progressDeadlineSeconds: 10
-          # - name: controller.progressDeadlineSeconds=10
-          # - value: 10
+    - repoURL: https://github.com/EduardoThums/terraform-helm-test.git
+      targetRevision: main
+      path: helm/ingress-nginx
   destination:
     namespace: ingress-nginx
     server: https://kubernetes.default.svc

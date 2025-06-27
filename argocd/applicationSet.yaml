@@ -24,9 +24,9 @@ spec:
           helm:
             parameters:
               - name: argocd.certManager.enabled
-                value: 'false'
-              - name: argocd.ingressNginx.enabled
                 value: 'true'
+              - name: argocd.ingressNginx.enabled
+                value: 'false'
               - name: argocd.girusIngress.enabled
                 value: 'false'
       destination:
