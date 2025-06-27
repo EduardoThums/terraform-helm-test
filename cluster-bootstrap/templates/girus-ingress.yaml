@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/EduardoThums/terraform-helm-test.git
     targetRevision: main
-    path: girus-ingress/
+    path: helm/girus-ingress
     # helm:
     #   parameters:
     #     - name: cloudflare.token
