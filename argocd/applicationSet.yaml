@@ -28,7 +28,7 @@ spec:
               - name: argocd.ingressNginx.enabled
                 value: 'true'
               - name: argocd.girusIngress.enabled
-                value: 'false'
+                value: 'true'
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: argocd

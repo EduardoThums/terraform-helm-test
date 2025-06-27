@@ -28,3 +28,31 @@ configs:
       hs.status = "Healthy"
       hs.message = "Service is not of type LoadBalancer"
       return hs
+    resource.customizations.health.networking.k8s.io_Ingress: |
+      hs = {}
+      -- Check if this is a LoadBalancer service
+      if obj.spec ~= nil and obj.spec.type == "LoadBalancer" then
+        -- If LoadBalancer ingress is empty, mark as healthy (ignore)
+        if obj.status == nil or obj.status.loadBalancer == nil or obj.status.loadBalancer.ingress == nil or #obj.status.loadBalancer.ingress == 0 then
+          hs.status = "Healthy"
+          hs.message = "LoadBalancer service waiting for external IP/hostname assignment"
+          return hs
+        end
+        -- Otherwise, check for hostname or IP in the ingress list
+        for i, ingress in ipairs(obj.status.loadBalancer.ingress) do
+          if ingress.hostname ~= nil or ingress.ip ~= nil then
+            hs.status = "Healthy"
+            hs.message = "LoadBalancer service has external IP/hostname assigned"
+            return hs
+          end
+        end
+        -- If we get here, there are ingress entries but no hostname or IP
+        hs.status = "Degraded"
+        hs.message = "LoadBalancer service has ingress entries but no hostname or IP"
+        return hs
+      end
+      
+      -- For non-LoadBalancer services, use default health check
+      hs.status = "Healthy"
+      hs.message = "Service is not of type LoadBalancer"
+      return hs
