@@ -1,8 +1,6 @@
 argocd:
   certManager:
     enabled: true
-  ingressNginx:
-    enabled: true
   girus:
     enabled: false
     ingress:
