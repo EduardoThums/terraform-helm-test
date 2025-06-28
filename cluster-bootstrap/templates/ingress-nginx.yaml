@@ -1,4 +1,4 @@
-{{ if .Values.argocd.girus.ingress.enabled }}
+{{ if .Values.argocd.ingress.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
