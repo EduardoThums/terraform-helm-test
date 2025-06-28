@@ -3,5 +3,7 @@ argocd:
     enabled: true
   ingressNginx:
     enabled: true
-  girusIngress:
+  girus:
     enabled: false
+    ingress:
+      enabled: false

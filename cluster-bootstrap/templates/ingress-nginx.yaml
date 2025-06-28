@@ -1,4 +1,4 @@
-{{ if .Values.argocd.ingressNginx.enabled }}
+{{ if .Values.argocd.girus.ingress.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

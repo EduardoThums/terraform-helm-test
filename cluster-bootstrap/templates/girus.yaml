@@ -1,0 +1,20 @@
+{{ if .Values.argocd.girus.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: girus
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://EduardoThums-Girus-PICK.github.io/helm
+    targetRevision: 1.0.10
+    path: helm/girus-ingress
+  destination:
+    namespace: girus
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+{{ end }}
