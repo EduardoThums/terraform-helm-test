@@ -13,7 +13,7 @@ spec:
     helm:
       parameters:
         - name: ingress.external
-        - value: {{- if .Values.argocd.girus.ingress.enabled -}}
+          value: {{- if .Values.argocd.girus.ingress.enabled -}}
   destination:
     namespace: girus
     server: https://kubernetes.default.svc
