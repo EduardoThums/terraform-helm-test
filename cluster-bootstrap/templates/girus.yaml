@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://EduardoThums-Girus-PICK.github.io/helm
     targetRevision: 1.0.10
-    chart: helm
+    chart: girus
   destination:
     namespace: girus
     server: https://kubernetes.default.svc
