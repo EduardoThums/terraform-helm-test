@@ -12,6 +12,8 @@ spec:
     chart: girus
     helm:
       parameters:
+        - name: ingress.enabled
+          value: '{{ .Values.argocd.girus.ingress.enabled }}'
         - name: ingress.external
           value: '{{ .Values.argocd.girus.ingress.enabled }}'
   destination:
