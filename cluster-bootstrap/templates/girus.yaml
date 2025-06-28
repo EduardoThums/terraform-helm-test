@@ -10,6 +10,10 @@ spec:
     repoURL: https://EduardoThums-Girus-PICK.github.io/helm
     targetRevision: 1.0.10
     chart: girus
+    helm:
+      parameters:
+        - name: ingress.external
+        - value: {{- if .Values.argocd.girus.ingress.enabled -}}
   destination:
     namespace: girus
     server: https://kubernetes.default.svc
